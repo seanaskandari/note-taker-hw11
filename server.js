@@ -14,14 +14,14 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-app.get("notes.html", function (req, res) {
-    res.sendFile(path.join(__dirname, "notes.html"));
+app.get("/notes", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
-app.post("/api", function(req, res){
+app.post("/api/notes", function(req, res){
     var notes = req.body;
     
     savedNotes.push(notes);
@@ -34,8 +34,7 @@ app.post("/api", function(req, res){
     res.json(notes);
 })
 
-app.get("/api", function(req, res){
-    // res.json(savedNotes);
+app.get("/api/notes", function(req, res) {
     fs.readFile(__dirname + "/api/db.json", function(err, data){
         if(err) throw err;
         console.log(data[0].title);
