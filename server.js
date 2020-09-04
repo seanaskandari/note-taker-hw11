@@ -14,11 +14,11 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/notess/index.html"));
+    res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/notes/notes.html"));
+app.get("notes.html", function (req, res) {
+    res.sendFile(path.join(__dirname, "notes.html"));
 });
 
 app.post("/api/notes", function(req, res){
@@ -26,7 +26,7 @@ app.post("/api/notes", function(req, res){
     
     savedNotes.push(notes);
 
-    fs.writeFile(__dirname + "/db/db.json", JSON.stringify(savedNotes), function(err){
+    fs.writeFile(__dirname + "/api/db.json", JSON.stringify(savedNotes), function(err){
         if(err) throw err;
         console.log("File updated.")
     })
